@@ -1,0 +1,19 @@
+---
+# defaults file for rl_awx_basic_configuration
+
+vm_domain: 'virtualman.local'
+
+### AWX Variables ###
+awx_controller_host: '{{ inventory_hostname }}.{{ vm_domain }}'
+awx_controller_username: 'admin'
+awx_controller_password: 'awx123456'
+awx_organization_name: 'virtualman.local'
+awx_machine_credential: 'cred-machine-user-awx'
+awx_machine_credential_user: 'awx'
+awx_machine_credential_password: 'awx123456!'
+awx_scm_credential: 'cred-pat-github'
+awx_scm_credential_user: 'TKILLAHOME'
+awx_scm_credential_password: ''
+awx_container_registry_credential: 'cred-container-registry-harbor'
+awx_container_registry_credential_user: 'admin'
+awx_container_registry_credential_password: 'Harbor'

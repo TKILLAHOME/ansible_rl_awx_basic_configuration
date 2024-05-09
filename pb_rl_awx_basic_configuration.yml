@@ -1,0 +1,9 @@
+---
+
+- name: AWX Basic Configuration
+  hosts: all
+  gather_facts: false
+  become: true
+
+  roles:
+    - 'rl_awx_basic_configuration'

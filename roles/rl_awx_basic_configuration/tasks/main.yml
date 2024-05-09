@@ -1,0 +1,57 @@
+---
+# tasks file for rl_awx_basic_configuration
+
+- name: Create organization {{ awx_organization_name }}
+  awx.awx.organization:
+    controller_host: '{{ awx_controller_host }}'
+    controller_username: '{{ awx_controller_username }}'
+    controller_password: '{{ awx_controller_password }}'
+    validate_certs: false
+    name: '{{ awx_organization_name }}'
+    description: "Default Organization - Created by AWX"
+    state: present
+
+- name: Add machine credential {{ awx_machine_credential }}
+  awx.awx.credential:
+    controller_host: '{{ awx_controller_host }}'
+    controller_username: '{{ awx_controller_username }}'
+    controller_password: '{{ awx_controller_password }}'
+    validate_certs: false
+    name: '{{ awx_machine_credential }}'
+    description: 'AWX User on Target Machine - Created by AWX'
+    organization: '{{ awx_organization_name }}'
+    credential_type: 'Machine'
+    state: present
+    inputs:
+      username: '{{ awx_machine_credential_user }}'
+      password: '{{ awx_machine_credential_password }}'
+
+- name: Add source control credential
+  awx.awx.credential:
+    controller_host: '{{ awx_controller_host }}'
+    controller_username: '{{ awx_controller_username }}'
+    controller_password: '{{ awx_controller_password }}'
+    validate_certs: false
+    name: '{{ awx_scm_credential }}'
+    description: 'AWX User on Target Machine - Created by AWX'
+    organization: '{{ awx_organization_name }}'
+    credential_type: 'Source Control'
+    state: present
+    inputs:
+      username: '{{ awx_scm_credential_user }}'
+      password: '{{ awx_scm_credential_password }}'
+
+- name: Add container registry credential
+  awx.awx.credential:
+    controller_host: '{{ awx_controller_host }}'
+    controller_username: '{{ awx_controller_username }}'
+    controller_password: '{{ awx_controller_password }}'
+    validate_certs: false
+    name: '{{ awx_scm_credential }}'
+    description: 'AWX User on Target Machine - Created by AWX'
+    organization: '{{ awx_organization_name }}'
+    credential_type: 'Container Registry'
+    state: present
+    inputs:
+      username: '{{ awx_container_registry_credential_user }}'
+      password: '{{ awx_container_registry_credential_password }}'
